@@ -1,0 +1,80 @@
+<!--login.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/app.css" >
+  <title>{{ .title }}</title>
+  <link rel="icon" href="/static/img/logo2.png">
+</head>
+
+<body>
+
+{{ template "default-layout.html" .}}
+
+<main>
+  <div class="form-signin text-center container-login">
+    <form @submit="login">
+      <h1 class="h3 mb-3 fw-normal">Please log in</h1>
+      <div class="form-floating">
+        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" data-nlok-ref-guid="cab011a5-f42f-4907-e41c-258319561f6d"><div id="mail" style="height:42.18181818181818px;max-width:42.18181818181818px;vertical-align:top; position:absolute; top:7.90909090909091px;left:248.1407624633431px;cursor:pointer;resize: both;z-index:2147483646;"></div>
+        <label for="floatingInput">Email address</label>
+        <div class="error"></div>
+      </div>
+      <div class="form-floating">
+        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" data-nlok-ref-guid="8da03ae9-6b41-4357-fce3-2cd87cad0b83"><div id="pass" style="height:42.18181818181818px;max-width:42.18181818181818px;vertical-align:top; position:absolute; top:7.90909090909091px;left:248.1407624633431px;cursor:pointer;resize: both;z-index:2147483646;"></div>
+        <label for="floatingPassword">Password</label>
+        <div class="error"></div>
+      </div>
+
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit" data-nlok-ref-guid="9a5a7038-4e49-4203-b48c-97e0e4e2b4ae">Log in</button>
+      <div type="button" class="btn btn-primary btn-sm sign-up">Sign up</div>
+      <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+    </form>
+  </div>
+</main>
+
+{{ template "footer.html" .}}
+</body>
+</html>
+
+<script>
+  export default {
+    name: "Login",
+    data() {
+      return {
+        email: '',
+        password: '',
+        errorsEmail: '',
+        errorsPassword: ''
+      }
+    },
+    methods: {
+      login(event) {
+        this.errorsEmail = ''
+        this.errorsPassword = ''
+        if (this.email.trim().length === 0) {
+          this.errorsEmail = 'Пожалуйста заполниет Email.'
+        }
+        if (this.password.trim().length === 0) {
+          this.errorsPassword = 'Пожалуйста заполниет Пароль.'
+        }
+        if (this.errorsEmail.length === 0 && this.errorsPassword.length === 0) {
+          alert('Отправили запрос.')
+        }
+        event.preventDefault()
+      }
+    }
+  }
+</script>
